@@ -11,12 +11,12 @@
 
     <tbody>
         {% for cliente in clientes %}
-        <tr">
-            <td scope="col">{{ cliente.idCliente }}</td>
-            <td scope="col">{{ cliente.nombreCliente }}</td>
-            <td scope="col">{{ cliente.telefono }}</td>
-            <td scope="col">{{ cliente.correoElectronico }}</td>
-            <td scope="col"></td>
+        <tr>
+            <td>{{ cliente.idCliente }}</td>
+            <td>{{ cliente.nombreCliente }}</td>
+            <td>{{ cliente.telefono }}</td>
+            <td>{{ cliente.correoElectronico }}</td>
+            <td></td>
         </tr>
         {% endfor %}
     </tbody>
