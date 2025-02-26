@@ -45,19 +45,19 @@ def app2():
 
     return "<h5>Hola, soy la view app</h5>";
 
-@app.route("/productos")
-def productos():
+@app.route("/clientes")
+def clientes():
     if not con.is_connected():
         con.reconnect()
 
     cursor = con.cursor(dictionary=True)
     sql    = """
-    SELECT Id_Producto,
-           Nombre_Producto,
-           Precio,
-           Existencias
+    SELECT idCliente,
+           nombreCliente,
+           telefono,
+           correoElectronico
 
-    FROM productos
+    FROM clientes
 
     LIMIT 10 OFFSET 0
     """
@@ -75,7 +75,42 @@ def productos():
         registro["Hora"]       = fecha_hora.strftime("%H:%M:%S")
     """
 
-    return render_template("productos.html", productos=registros)
+    return render_template("clientes.html", clientes=registros)
+
+@app.route("/eventos")
+def eventos():
+    if not con.is_connected():
+        con.reconnect()
+
+    cursor = con.cursor(dictionary=True)
+    sql    = """
+    SELECT idEvento,
+           idCliente,
+           descripcionUbicacion,
+           descripcionEvento,
+           fechaInicio,
+           fechaFin,
+           estado
+
+    FROM eventos
+
+    LIMIT 10 OFFSET 0
+    """
+
+    cursor.execute(sql)
+    registros = cursor.fetchall()
+
+    # Si manejas fechas y horas
+    """
+    for registro in registros:
+        fecha_hora = registro["Fecha_Hora"]
+
+        registro["Fecha_Hora"] = fecha_hora.strftime("%Y-%m-%d %H:%M:%S")
+        registro["Fecha"]      = fecha_hora.strftime("%d/%m/%Y")
+        registro["Hora"]       = fecha_hora.strftime("%H:%M:%S")
+    """
+
+    return render_template("eventos.html", eventos=registros)
 
 @app.route("/productos/buscar", methods=["GET"])
 def buscarProductos():
