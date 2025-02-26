@@ -16,16 +16,15 @@ app.config(function ($routeProvider, $locationProvider) {
     // y para las rutas
     $routeProvider
     .when("/", {
-        templateUrl: "views/app.html",
+        templateUrl: "/app",
         controller: "appCtrl"
     })
     .when("/clientes", {
-        templateUrl: "views/clientes.html",
+        templateUrl: "/clientes",
         controller: "clientesCtrl"
     })
-    .when("/eventos", {
-        templateUrl: "views/eventos.html",
-        controller: "eventosCtrl"
+    .otherwise({
+        redirectTo: "/"
     })
 })
 app.run(["$rootScope", "$location", "$timeout", function($rootScope, $location, $timeout) {
@@ -69,23 +68,10 @@ app.run(["$rootScope", "$location", "$timeout", function($rootScope, $location, 
 
 // Hay que modificarlo para los controladores
 app.controller("appCtrl", function ($scope, $http) {
+    // alert("Hola, soy el controlador app")
 })
 app.controller("clientesCtrl", function ($scope, $http) {
-
-    $http.get("app/app.php?clientes")
-    .then(function (response) {
-        const clientes = response.data
-        $scope.clientes = clientes
-    })
-})
-
-app.controller("eventosCtrl", function ($scope, $http) {
-
-    $http.get("app/app.php?eventos")
-    .then(function (response) {
-        const eventos = response.data
-        $scope.eventos = eventos
-    })
+    // alert("Hola, soy el controlador productos")
 })
 
 const DateTime = luxon.DateTime
