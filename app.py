@@ -34,7 +34,7 @@ def index():
 
     con.close()
 
-    return render_template("index.html")
+    return render_template("templates/index.html")
 
 @app.route("/app")
 def app2():
