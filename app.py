@@ -20,7 +20,7 @@ from flask_cors import CORS, cross_origin
 con = mysql.connector.connect(
     host="185.232.14.52",
     database="u760464709_23005336_bd",
-    user="u760464709_23005336_usr",
+    user="u760464709_16005339_usr",
     password="4hpY9Z[z"
 )
 
@@ -34,7 +34,7 @@ def index():
 
     con.close()
 
-    return render_template("templates/index.html")
+    return render_template("index.html")
 
 @app.route("/app")
 def app2():
@@ -52,12 +52,7 @@ def clientes():
 
     cursor = con.cursor(dictionary=True)
     sql    = """
-    SELECT idCliente,
-           nombreCliente,
-           telefono,
-           correoElectronico
-
-    FROM clientes
+    SELECT * FROM clientes
 
     LIMIT 10 OFFSET 0
     """
@@ -76,41 +71,6 @@ def clientes():
     """
 
     return render_template("clientes.html", clientes=registros)
-
-@app.route("/eventos")
-def eventos():
-    if not con.is_connected():
-        con.reconnect()
-
-    cursor = con.cursor(dictionary=True)
-    sql    = """
-    SELECT idEvento,
-           idCliente,
-           descripcionUbicacion,
-           descripcionEvento,
-           fechaInicio,
-           fechaFin,
-           estado
-
-    FROM eventos
-
-    LIMIT 10 OFFSET 0
-    """
-
-    cursor.execute(sql)
-    registros = cursor.fetchall()
-
-    # Si manejas fechas y horas
-    """
-    for registro in registros:
-        fecha_hora = registro["Fecha_Hora"]
-
-        registro["Fecha_Hora"] = fecha_hora.strftime("%Y-%m-%d %H:%M:%S")
-        registro["Fecha"]      = fecha_hora.strftime("%d/%m/%Y")
-        registro["Hora"]       = fecha_hora.strftime("%H:%M:%S")
-    """
-
-    return render_template("eventos.html", eventos=registros)
 
 @app.route("/productos/buscar", methods=["GET"])
 def buscarProductos():
