@@ -10,12 +10,14 @@
     </thead>
 
     <tbody>
-        <tr ng-repeat="x in clientes">
-            <td scope="col">{{ x.idCliente }}</td>
-            <td scope="col">{{ x.nombreCliente }}</td>
-            <td scope="col">{{ x.telefono }}</td>
-            <td scope="col">{{ x.correoElectronico }}</td>
+        {% for cliente in clientes %}
+        <tr">
+            <td scope="col">{{ cliente.idCliente }}</td>
+            <td scope="col">{{ cliente.nombreCliente }}</td>
+            <td scope="col">{{ cliente.telefono }}</td>
+            <td scope="col">{{ cliente.correoElectronico }}</td>
             <td scope="col"></td>
         </tr>
+        {% endfor %}
     </tbody>
 </table>
